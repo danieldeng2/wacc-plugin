@@ -1,6 +1,6 @@
 <idea-plugin>
     <id>com.github.danieldeng2.waccplugin</id>
-    <name>wacc-plugin</name>
+    <name>WACC</name>
     <vendor>danieldeng2</vendor>
 
     <!-- Product and plugin compatibility requirements -->
@@ -16,4 +16,10 @@
         <listener class="com.github.danieldeng2.waccplugin.listeners.MyProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <fileType name="Simple File" implementationClass="com.github.danieldeng2.waccplugin.language.WaccFileType"
+                  language="WACC" extensions="wacc"/>
+    </extensions>
+
 </idea-plugin>
