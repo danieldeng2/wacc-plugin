@@ -1,6 +1,6 @@
-package org.jetbrains.plugins.template.services
+package com.github.danieldeng2.waccplugin.services
 
-import org.jetbrains.plugins.template.MyBundle
+import com.github.danieldeng2.waccplugin.MyBundle
 
 class MyApplicationService {
 
