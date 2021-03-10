@@ -18,11 +18,12 @@ plugins {
     id("io.gitlab.arturbosch.detekt") version "1.15.0"
     // ktlint linter - read more: https://github.com/JLLeitschuh/ktlint-gradle
     id("org.jlleitschuh.gradle.ktlint") version "10.0.0"
+    application
+    antlr
 }
 
 group = properties("pluginGroup")
 version = properties("pluginVersion")
-sourceSets["main"].java.srcDirs("src/main/gen")
 
 // Configure project's dependencies
 repositories {
@@ -31,6 +32,8 @@ repositories {
 }
 dependencies {
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.15.0")
+    implementation("org.antlr:antlr4-intellij-adaptor:0.1")
+    antlr("org.antlr:antlr4:4.9.1")
 }
 
 // Configure gradle-intellij-plugin plugin.
@@ -120,4 +123,18 @@ tasks {
         // https://plugins.jetbrains.com/docs/intellij/deployment.html#specifying-a-release-channel
         channels(properties("pluginVersion").split('-').getOrElse(1) { "default" }.split('.').first())
     }
+
+    generateGrammarSource {
+        arguments = listOf("-visitor", "-package", "com.github.danieldeng2.waccplugin.language.parser", "-Xexact-output-dir")
+        outputDirectory = File("${project.buildDir}/generated-src/antlr/main/com/github/danieldeng2/waccplugin/language/parser")
+    }
+
+    compileKotlin {
+        dependsOn(generateGrammarSource)
+    }
+
+    compileTestKotlin {
+        dependsOn(generateTestGrammarSource)
+    }
+
 }

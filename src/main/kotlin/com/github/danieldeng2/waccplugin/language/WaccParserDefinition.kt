@@ -1,7 +1,6 @@
 package com.github.danieldeng2.waccplugin.language
 
 import com.github.danieldeng2.waccplugin.language.psi.WaccFile
-import com.github.danieldeng2.waccplugin.language.psi.WaccTypes
 import com.intellij.lang.ASTNode
 import com.intellij.lang.ParserDefinition
 import com.intellij.lang.ParserDefinition.SpaceRequirements
@@ -11,50 +10,66 @@ import com.intellij.openapi.project.Project
 import com.intellij.psi.FileViewProvider
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
-import com.intellij.psi.TokenType
+import com.intellij.psi.tree.IElementType
 import com.intellij.psi.tree.IFileElementType
 import com.intellij.psi.tree.TokenSet
+import org.antlr.intellij.adaptor.lexer.ANTLRLexerAdaptor
+import org.antlr.intellij.adaptor.lexer.PSIElementTypeFactory
+import org.antlr.intellij.adaptor.parser.ANTLRParserAdaptor
+import org.antlr.intellij.adaptor.psi.ANTLRPsiNode
+import org.antlr.v4.runtime.Parser
+import org.antlr.v4.runtime.tree.ParseTree
+import com.github.danieldeng2.waccplugin.language.parser.*
 
 class WaccParserDefinition : ParserDefinition {
-    override fun createLexer(project: Project): Lexer {
-        return WaccLexerAdapter()
+    init {
+        PSIElementTypeFactory.defineLanguageIElementTypes(WaccLanguage, WACCParser.tokenNames, WACCParser.ruleNames);
+        val tokenIElementTypes = PSIElementTypeFactory.getTokenIElementTypes(WaccLanguage)
     }
 
-    override fun getWhitespaceTokens(): TokenSet {
-        return WHITE_SPACES
-    }
+    override fun createLexer(project: Project): Lexer =
+        ANTLRLexerAdaptor(WaccLanguage, WACCLexer(null))
 
-    override fun getCommentTokens(): TokenSet {
-        return COMMENTS
-    }
-
-    override fun getStringLiteralElements(): TokenSet {
-        return TokenSet.EMPTY
-    }
-
-    override fun createParser(project: Project): PsiParser {
-        return WaccParser()
-    }
-
-    override fun getFileNodeType(): IFileElementType {
-        return FILE
-    }
+    override fun createParser(project: Project?): PsiParser =
+        object : ANTLRParserAdaptor(WaccLanguage, WACCParser(null)) {
+            override fun parse(parser: Parser, root: IElementType): ParseTree =
+                (parser as WACCParser).prog()
+        }
 
     override fun createFile(viewProvider: FileViewProvider): PsiFile {
         return WaccFile(viewProvider)
+    }
+
+    override fun createElement(node: ASTNode): PsiElement {
+        return ANTLRPsiNode(node)
     }
 
     override fun spaceExistenceTypeBetweenTokens(left: ASTNode, right: ASTNode): SpaceRequirements {
         return SpaceRequirements.MAY
     }
 
-    override fun createElement(node: ASTNode): PsiElement {
-        return WaccTypes.Factory.createElement(node)
-    }
+    /* returns static objects */
+    override fun getWhitespaceTokens() = WHITE_SPACES
+
+    override fun getCommentTokens(): TokenSet = COMMENTS
+
+    override fun getStringLiteralElements(): TokenSet = STRING
+
+    override fun getFileNodeType(): IFileElementType = FILE
 
     companion object {
-        val WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE)
-        val COMMENTS = TokenSet.create(WaccTypes.COMMENT)
+        val WHITE_SPACES: TokenSet = PSIElementTypeFactory.createTokenSet(
+            WaccLanguage,
+            WACCLexer.WS
+        )
+        val COMMENTS: TokenSet = PSIElementTypeFactory.createTokenSet(
+            WaccLanguage,
+            WACCLexer.COMMENT
+        )
+        val STRING: TokenSet = PSIElementTypeFactory.createTokenSet(
+            WaccLanguage,
+            WACCLexer.STRING
+        )
         val FILE = IFileElementType(WaccLanguage)
     }
 }
