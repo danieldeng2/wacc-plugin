@@ -6,3 +6,11 @@ formatting:
     continuationIndentSize: 8
   ParameterListWrapping:
     indentSize: 8
+
+complexity:
+  LongMethod:
+    active: false
+
+style:
+  ReturnCount:
+    active: false

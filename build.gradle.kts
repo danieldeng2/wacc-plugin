@@ -136,5 +136,4 @@ tasks {
     compileTestKotlin {
         dependsOn(generateTestGrammarSource)
     }
-
 }

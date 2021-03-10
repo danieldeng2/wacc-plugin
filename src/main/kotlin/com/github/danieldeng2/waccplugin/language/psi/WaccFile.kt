@@ -10,8 +10,7 @@ class WaccFile(viewProvider: FileViewProvider) : PsiFileBase(viewProvider, WaccL
     override fun getFileType(): FileType {
         return WaccFileType
     }
-
     override fun toString(): String {
-        return "Wacc File"
+        return "WACC File"
     }
 }

@@ -1,5 +1,6 @@
 package com.github.danieldeng2.waccplugin.language
 
+import com.github.danieldeng2.waccplugin.language.parser.WACCLexer
 import com.intellij.lexer.Lexer
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors
 import com.intellij.openapi.editor.HighlighterColors
@@ -12,7 +13,6 @@ import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.tree.IElementType
 import org.antlr.intellij.adaptor.lexer.ANTLRLexerAdaptor
 import org.antlr.intellij.adaptor.lexer.TokenIElementType
-import com.github.danieldeng2.waccplugin.language.parser.*
 
 class WaccSyntaxHighlighterFactory : SyntaxHighlighterFactory() {
     override fun getSyntaxHighlighter(project: Project?, virtualFile: VirtualFile?): SyntaxHighlighter =
@@ -25,54 +25,129 @@ class WaccSyntaxHighlighter : SyntaxHighlighterBase() {
 
     override fun getTokenHighlights(tokenType: IElementType): Array<out TextAttributesKey?> {
         if (tokenType !is TokenIElementType) return EMPTY_KEYS
-
-        return when (tokenType.antlrTokenType) {
+        val attrKey: TextAttributesKey = when (tokenType.antlrTokenType) {
+            WACCLexer.INT,
+            WACCLexer.BOOL,
+            WACCLexer.CHAR,
+            WACCLexer.STRING,
             WACCLexer.BEGIN,
             WACCLexer.END,
-            WACCLexer.IS,
-            WACCLexer.SKIP_,
-            WACCLexer.READ,
-            WACCLexer.FREE,
             WACCLexer.RETURN,
-            WACCLexer.EXIT,
-            WACCLexer.PRINT,
-            WACCLexer.PRINTLN,
             WACCLexer.IF,
             WACCLexer.THEN,
             WACCLexer.ELSE,
             WACCLexer.FI,
+            WACCLexer.PAIR,
             WACCLexer.WHILE,
             WACCLexer.DO,
-            WACCLexer.DONE,
+            WACCLexer.NULL,
+            WACCLexer.BOOL_LITER,
+            WACCLexer.DONE ->
+                KEYWORD
+
+            WACCLexer.READ,
+            WACCLexer.FREE,
+            WACCLexer.PRINT,
+            WACCLexer.PRINTLN,
+            WACCLexer.NEWPAIR,
+            WACCLexer.FST,
+            WACCLexer.SND,
+            WACCLexer.IS,
+            WACCLexer.EXIT ->
+                KEYWORD
+
             WACCLexer.CALL ->
-                KEYWORD_KEYS
+                FUNC_CALL
+
+            WACCLexer.COMMA,
+            WACCLexer.EQUAL,
+            WACCLexer.PLUS,
+            WACCLexer.MINUS,
+            WACCLexer.NOT,
+            WACCLexer.LEN,
+            WACCLexer.ORD,
+            WACCLexer.CHR,
+            WACCLexer.MUL,
+            WACCLexer.DIV,
+            WACCLexer.MOD,
+            WACCLexer.GT,
+            WACCLexer.GE,
+            WACCLexer.LT,
+            WACCLexer.LE,
+            WACCLexer.EQ,
+            WACCLexer.NEQ,
+            WACCLexer.AND,
+            WACCLexer.OR ->
+                OPERATOR
+
+            WACCLexer.OPEN_PAREN,
+            WACCLexer.CLOSE_PAREN,
+            WACCLexer.OPEN_SQR_PAREN,
+            WACCLexer.CLOSE_SQR_PAREN ->
+                BRACKETS
+
             WACCLexer.COMMENT ->
-                COMMENT_KEYS
+                COMMENT
+
+            WACCLexer.SEMICOLON ->
+                COLON
+
             WACCLexer.ERRCHAR ->
-                BAD_CHAR_KEYS
+                BAD_CHARACTER
+
+            WACCLexer.STR_LITER, WACCLexer.CHAR_LITER ->
+                STRING
+
+            WACCLexer.IDENT ->
+                IDENT
+
+            WACCLexer.INT_LITER ->
+                NUMBER
+
             else -> {
-                EMPTY_KEYS
+                return EMPTY_KEYS
             }
         }
 
-
+        return arrayOf(attrKey)
     }
 
     companion object {
         private val KEYWORD =
             TextAttributesKey.createTextAttributesKey("WACC_KEYWORD", DefaultLanguageHighlighterColors.KEYWORD)
-        private val STRING = TextAttributesKey.createTextAttributesKey("WACC_STRING", DefaultLanguageHighlighterColors.STRING)
+        private val STRING =
+            TextAttributesKey.createTextAttributesKey("WACC_STRING", DefaultLanguageHighlighterColors.STRING)
+
+        private val NUMBER =
+            TextAttributesKey.createTextAttributesKey("WACC_INT", DefaultLanguageHighlighterColors.NUMBER)
 
         private val COMMENT =
             TextAttributesKey.createTextAttributesKey("WACC_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT)
 
+        private val IDENT =
+            TextAttributesKey.createTextAttributesKey("WACC_IDENT", DefaultLanguageHighlighterColors.IDENTIFIER)
+
+        private val BRACKETS =
+            TextAttributesKey.createTextAttributesKey("WACC_BRACKETS", DefaultLanguageHighlighterColors.BRACKETS)
+
+        private val COLON =
+            TextAttributesKey.createTextAttributesKey("WACC_COLON", DefaultLanguageHighlighterColors.SEMICOLON)
+
         private val BAD_CHARACTER =
             TextAttributesKey.createTextAttributesKey("WACC_BAD_CHARACTER", HighlighterColors.BAD_CHARACTER)
 
-        private val BAD_CHAR_KEYS = arrayOf(BAD_CHARACTER)
-        private val KEYWORD_KEYS = arrayOf(KEYWORD)
-        private val STRING_KEYS = arrayOf(STRING)
-        private val COMMENT_KEYS = arrayOf(COMMENT)
+        private val FUNC_CALL =
+            TextAttributesKey.createTextAttributesKey(
+                "WACC_FUNC_CALL",
+                DefaultLanguageHighlighterColors.FUNCTION_DECLARATION
+            )
+
+        private val OPERATOR =
+            TextAttributesKey.createTextAttributesKey(
+                "WACC_OPERATOR",
+                DefaultLanguageHighlighterColors.OPERATION_SIGN
+            )
+
         private val EMPTY_KEYS = arrayOfNulls<TextAttributesKey>(0)
     }
 }

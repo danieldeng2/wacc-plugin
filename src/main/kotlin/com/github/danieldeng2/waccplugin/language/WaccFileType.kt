@@ -14,7 +14,7 @@ object WaccIcons {
 object WaccFileType : LanguageFileType(WaccLanguage) {
 
     override fun getName(): String =
-        "Wacc File"
+        "WACC File"
 
     override fun getDescription(): String =
         "A wacc source file"

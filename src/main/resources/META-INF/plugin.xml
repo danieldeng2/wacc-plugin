@@ -11,7 +11,7 @@
         <applicationService serviceImplementation="com.github.danieldeng2.waccplugin.services.MyApplicationService"/>
         <projectService serviceImplementation="com.github.danieldeng2.waccplugin.services.MyProjectService"/>
 
-        <fileType name="Simple File" implementationClass="com.github.danieldeng2.waccplugin.language.WaccFileType"
+        <fileType name="WACC File" implementationClass="com.github.danieldeng2.waccplugin.language.WaccFileType"
                   language="WACC" extensions="wacc"/>
 
         <lang.parserDefinition language="WACC"

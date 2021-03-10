@@ -1,5 +1,7 @@
 package com.github.danieldeng2.waccplugin.language
 
+import com.github.danieldeng2.waccplugin.language.parser.WACCLexer
+import com.github.danieldeng2.waccplugin.language.parser.WACCParser
 import com.github.danieldeng2.waccplugin.language.psi.WaccFile
 import com.intellij.lang.ASTNode
 import com.intellij.lang.ParserDefinition
@@ -19,13 +21,8 @@ import org.antlr.intellij.adaptor.parser.ANTLRParserAdaptor
 import org.antlr.intellij.adaptor.psi.ANTLRPsiNode
 import org.antlr.v4.runtime.Parser
 import org.antlr.v4.runtime.tree.ParseTree
-import com.github.danieldeng2.waccplugin.language.parser.*
 
 class WaccParserDefinition : ParserDefinition {
-    init {
-        PSIElementTypeFactory.defineLanguageIElementTypes(WaccLanguage, WACCParser.tokenNames, WACCParser.ruleNames);
-        val tokenIElementTypes = PSIElementTypeFactory.getTokenIElementTypes(WaccLanguage)
-    }
 
     override fun createLexer(project: Project): Lexer =
         ANTLRLexerAdaptor(WaccLanguage, WACCLexer(null))
@@ -58,6 +55,11 @@ class WaccParserDefinition : ParserDefinition {
     override fun getFileNodeType(): IFileElementType = FILE
 
     companion object {
+        init {
+            PSIElementTypeFactory.defineLanguageIElementTypes(WaccLanguage, WACCParser.tokenNames, WACCParser.ruleNames)
+            val tokenIElementTypes = PSIElementTypeFactory.getTokenIElementTypes(WaccLanguage)
+        }
+
         val WHITE_SPACES: TokenSet = PSIElementTypeFactory.createTokenSet(
             WaccLanguage,
             WACCLexer.WS
@@ -68,7 +70,7 @@ class WaccParserDefinition : ParserDefinition {
         )
         val STRING: TokenSet = PSIElementTypeFactory.createTokenSet(
             WaccLanguage,
-            WACCLexer.STRING
+            WACCLexer.STR_LITER
         )
         val FILE = IFileElementType(WaccLanguage)
     }
