@@ -10,16 +10,20 @@
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.github.danieldeng2.waccplugin.services.MyApplicationService"/>
         <projectService serviceImplementation="com.github.danieldeng2.waccplugin.services.MyProjectService"/>
+
+        <fileType name="Simple File" implementationClass="com.github.danieldeng2.waccplugin.language.WaccFileType"
+                  language="WACC" extensions="wacc"/>
+
+        <lang.parserDefinition language="WACC"
+                               implementationClass="com.github.danieldeng2.waccplugin.language.WaccParserDefinition"/>
+
+        <lang.syntaxHighlighterFactory language="WACC"
+                                       implementationClass="com.github.danieldeng2.waccplugin.language.WaccSyntaxHighlighterFactory"/>
     </extensions>
 
     <applicationListeners>
         <listener class="com.github.danieldeng2.waccplugin.listeners.MyProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
-
-    <extensions defaultExtensionNs="com.intellij">
-        <fileType name="Simple File" implementationClass="com.github.danieldeng2.waccplugin.language.WaccFileType"
-                  language="WACC" extensions="wacc"/>
-    </extensions>
 
 </idea-plugin>

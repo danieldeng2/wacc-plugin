@@ -1,9 +1,9 @@
 package com.github.danieldeng2.waccplugin.language
 
-import com.intellij.openapi.fileTypes.LanguageFileType
-import javax.swing.Icon
 import com.intellij.lang.Language
+import com.intellij.openapi.fileTypes.LanguageFileType
 import com.intellij.openapi.util.IconLoader
+import javax.swing.Icon
 
 object WaccLanguage : Language("WACC")
 
