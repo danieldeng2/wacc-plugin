@@ -1,7 +1,5 @@
 package com.github.danieldeng2.waccplugin.language
 
-import com.github.danieldeng2.waccplugin.language.parser.WACCLexer
-import com.github.danieldeng2.waccplugin.language.parser.WACCParser
 import com.github.danieldeng2.waccplugin.language.psi.WaccFile
 import com.intellij.lang.ASTNode
 import com.intellij.lang.ParserDefinition
@@ -21,6 +19,8 @@ import org.antlr.intellij.adaptor.parser.ANTLRParserAdaptor
 import org.antlr.intellij.adaptor.psi.ANTLRPsiNode
 import org.antlr.v4.runtime.Parser
 import org.antlr.v4.runtime.tree.ParseTree
+import wacc48.antlr.WACCLexer
+import wacc48.antlr.WACCParser
 
 class WaccParserDefinition : ParserDefinition {
 
@@ -57,7 +57,6 @@ class WaccParserDefinition : ParserDefinition {
     companion object {
         init {
             PSIElementTypeFactory.defineLanguageIElementTypes(WaccLanguage, WACCParser.tokenNames, WACCParser.ruleNames)
-            val tokenIElementTypes = PSIElementTypeFactory.getTokenIElementTypes(WaccLanguage)
         }
 
         val WHITE_SPACES: TokenSet = PSIElementTypeFactory.createTokenSet(

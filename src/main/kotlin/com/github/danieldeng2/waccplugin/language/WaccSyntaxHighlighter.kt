@@ -1,9 +1,7 @@
 package com.github.danieldeng2.waccplugin.language
 
-import com.github.danieldeng2.waccplugin.language.parser.WACCLexer
 import com.intellij.lexer.Lexer
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors
-import com.intellij.openapi.editor.HighlighterColors
 import com.intellij.openapi.editor.colors.TextAttributesKey
 import com.intellij.openapi.fileTypes.SyntaxHighlighter
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase
@@ -13,6 +11,7 @@ import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.tree.IElementType
 import org.antlr.intellij.adaptor.lexer.ANTLRLexerAdaptor
 import org.antlr.intellij.adaptor.lexer.TokenIElementType
+import wacc48.antlr.WACCLexer
 
 class WaccSyntaxHighlighterFactory : SyntaxHighlighterFactory() {
     override fun getSyntaxHighlighter(project: Project?, virtualFile: VirtualFile?): SyntaxHighlighter =
@@ -92,9 +91,6 @@ class WaccSyntaxHighlighter : SyntaxHighlighterBase() {
             WACCLexer.SEMICOLON ->
                 COLON
 
-            WACCLexer.ERRCHAR ->
-                BAD_CHARACTER
-
             WACCLexer.STR_LITER, WACCLexer.CHAR_LITER ->
                 STRING
 
@@ -132,9 +128,6 @@ class WaccSyntaxHighlighter : SyntaxHighlighterBase() {
 
         private val COLON =
             TextAttributesKey.createTextAttributesKey("WACC_COLON", DefaultLanguageHighlighterColors.SEMICOLON)
-
-        private val BAD_CHARACTER =
-            TextAttributesKey.createTextAttributesKey("WACC_BAD_CHARACTER", HighlighterColors.BAD_CHARACTER)
 
         private val FUNC_CALL =
             TextAttributesKey.createTextAttributesKey(
