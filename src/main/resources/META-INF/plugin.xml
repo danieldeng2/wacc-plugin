@@ -19,6 +19,10 @@
 
         <lang.syntaxHighlighterFactory language="WACC"
                                        implementationClass="com.github.danieldeng2.waccplugin.language.WaccSyntaxHighlighterFactory"/>
+
+        <externalAnnotator language="WACC"
+                           implementationClass="com.github.danieldeng2.waccplugin.language.WaccExternalAnnotator"/>
+
     </extensions>
 
     <applicationListeners>
