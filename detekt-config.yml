@@ -11,6 +11,10 @@ complexity:
   LongMethod:
     active: false
 
+exceptions:
+  TooGenericExceptionCaught:
+    active: false
+
 style:
   ReturnCount:
     active: false

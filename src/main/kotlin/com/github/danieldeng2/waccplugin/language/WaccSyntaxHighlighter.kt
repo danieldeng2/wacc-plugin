@@ -41,6 +41,7 @@ class WaccSyntaxHighlighter : SyntaxHighlighterBase() {
             WACCLexer.DO,
             WACCLexer.NULL,
             WACCLexer.BOOL_LITER,
+            WACCLexer.SKIP_,
             WACCLexer.DONE ->
                 KEYWORD
 

@@ -4,4 +4,5 @@
 
 ## [Unreleased]
 ### Added
-- Initial syntax highlighting support for the language. 
+- Initial syntax highlighting support
+- Add semantics annotator
