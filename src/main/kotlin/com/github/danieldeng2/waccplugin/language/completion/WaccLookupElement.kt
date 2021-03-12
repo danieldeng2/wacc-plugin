@@ -50,7 +50,7 @@ class WaccLookupElement(title: String) {
             editor.document.getLineStartOffset(lineNumber)
         val lineContent: String =
             editor.document.text.substring(lineStartOffset, lineEndOffset)
-        return "\n" + lineContent.substring(0, lineContent.length - lineContent.trim().length)
+        return "\n" + lineContent.substring(0, lineContent.length - lineContent.trim().length - 1)
     }
 
     private fun toInsertColon(editor: Editor): Boolean {

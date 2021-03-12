@@ -3,41 +3,45 @@ package com.github.danieldeng2.waccplugin.language.completion
 import com.intellij.codeInsight.completion.CompletionResultSet
 
 fun CompletionResultSet.addStatements() {
-    addWaccElement("begin") {
+    addWaccElement("begin ") {
         line("\tskip")
         line("end")
     }
 
-    addWaccElement("while") {
-        text(" true do")
+    addWaccElement("while ") {
+        text("true do")
         line("\tskip")
         line("done")
     }
 
-    addWaccElement("if") {
-        text(" true then")
+    addWaccElement("if ") {
+        text("true then")
         line("\t#true")
         line("else")
         line("\t#false")
         line("fi")
     }
 
-    addWaccElement("skip")
+    addWaccElement("skip ")
 
-    addWaccElement("println") {
-        text(" \"\"")
+    addWaccElement("println ") {
+        text("\"\"")
     }
 
-    addWaccElement("print") {
-        text(" \"\"")
+    addWaccElement("print ") {
+        text("\"\"")
     }
 
-    addWaccElement("free") {
-        text(" value")
+    addWaccElement("free ") {
+        text("value")
     }
 
-    addWaccElement("return") {
-        text(" 0")
+    addWaccElement("return ") {
+        text("0")
+    }
+
+    addWaccElement("exit ") {
+        text("0")
     }
 }
 
