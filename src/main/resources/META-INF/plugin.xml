@@ -24,12 +24,18 @@
         <lang.braceMatcher language="WACC"
                            implementationClass="com.github.danieldeng2.waccplugin.language.completion.WaccBraceMatcher"/>
 
+        <lang.commenter language="WACC" implementationClass="com.github.danieldeng2.waccplugin.language.WaccCommenter"/>
+
 
         <externalAnnotator language="WACC"
                            implementationClass="com.github.danieldeng2.waccplugin.language.annotator.WaccExternalAnnotator"/>
 
         <completion.contributor language="WACC"
                                 implementationClass="com.github.danieldeng2.waccplugin.language.completion.WaccCompletionContributor"/>
+
+        <configurationType
+                implementation="com.github.danieldeng2.waccplugin.runConfiguration.WaccRunConfigurationType"/>
+
     </extensions>
 
     <applicationListeners>
@@ -37,4 +43,12 @@
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
 
+    <actions>
+
+        <action id="com.github.danieldeng2.waccplugin.action.PopupDialogAction"
+                class="com.github.danieldeng2.waccplugin.action.PopupDialogAction" text="Popup Dialog Action"
+                description="Popup dialog">
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
+        </action>
+    </actions>
 </idea-plugin>
