@@ -22,14 +22,14 @@
 
 
         <lang.braceMatcher language="WACC"
-                           implementationClass="com.github.danieldeng2.waccplugin.language.WaccBraceMatcher"/>
+                           implementationClass="com.github.danieldeng2.waccplugin.language.completion.WaccBraceMatcher"/>
 
 
         <externalAnnotator language="WACC"
-                           implementationClass="com.github.danieldeng2.waccplugin.language.WaccExternalAnnotator"/>
+                           implementationClass="com.github.danieldeng2.waccplugin.language.annotator.WaccExternalAnnotator"/>
 
         <completion.contributor language="WACC"
-                                implementationClass="com.github.danieldeng2.waccplugin.language.WaccCompletionContributor"/>
+                                implementationClass="com.github.danieldeng2.waccplugin.language.completion.WaccCompletionContributor"/>
     </extensions>
 
     <applicationListeners>

@@ -1,5 +1,6 @@
-package com.github.danieldeng2.waccplugin.language
+package com.github.danieldeng2.waccplugin.language.completion
 
+import com.github.danieldeng2.waccplugin.language.WaccLanguage
 import com.intellij.lang.BracePair
 import com.intellij.lang.PairedBraceMatcher
 import com.intellij.psi.PsiFile
