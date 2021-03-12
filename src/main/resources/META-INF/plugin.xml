@@ -20,9 +20,16 @@
         <lang.syntaxHighlighterFactory language="WACC"
                                        implementationClass="com.github.danieldeng2.waccplugin.language.WaccSyntaxHighlighterFactory"/>
 
+
+        <lang.braceMatcher language="WACC"
+                           implementationClass="com.github.danieldeng2.waccplugin.language.WaccBraceMatcher"/>
+
+
         <externalAnnotator language="WACC"
                            implementationClass="com.github.danieldeng2.waccplugin.language.WaccExternalAnnotator"/>
 
+        <completion.contributor language="WACC"
+                                implementationClass="com.github.danieldeng2.waccplugin.language.WaccCompletionContributor"/>
     </extensions>
 
     <applicationListeners>
