@@ -6,23 +6,14 @@ import com.intellij.execution.configurations.ConfigurationType
 import javax.swing.Icon
 
 object WaccRunConfigurationType : ConfigurationType {
-    override fun getDisplayName(): String {
-        return "WACC Application"
-    }
+    override fun getDisplayName(): String = "WACC Application"
 
-    override fun getConfigurationTypeDescription(): String {
-        return "Wacc Run Configuration Type"
-    }
+    override fun getConfigurationTypeDescription(): String = "Wacc Run Configuration Type"
 
-    override fun getIcon(): Icon {
-        return WaccIcons.FILE
-    }
+    override fun getIcon(): Icon = WaccIcons.FILE
 
-    override fun getId(): String {
-        return "WaccRunConfiguration"
-    }
+    override fun getId(): String = "WaccRunConfiguration"
 
-    override fun getConfigurationFactories(): Array<ConfigurationFactory> {
-        return arrayOf(WaccConfigurationFactory(this))
-    }
+    override fun getConfigurationFactories(): Array<ConfigurationFactory> =
+        arrayOf(WaccConfigurationFactory(this))
 }

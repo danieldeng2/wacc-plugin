@@ -7,17 +7,12 @@ import com.intellij.openapi.components.BaseState
 import com.intellij.openapi.project.Project
 
 class WaccConfigurationFactory(type: ConfigurationType) : ConfigurationFactory(type) {
-    override fun createTemplateConfiguration(project: Project): RunConfiguration {
-        return WaccRunConfiguration(project, this, "WACC")
-    }
+    override fun createTemplateConfiguration(project: Project): RunConfiguration =
+        WaccRunConfiguration(project, this, "WACC")
 
-    override fun getName(): String {
-        return FACTORY_NAME
-    }
+    override fun getName(): String = FACTORY_NAME
 
-    override fun getOptionsClass(): Class<out BaseState> {
-        return WaccRunConfigurationOptions::class.java
-    }
+    override fun getOptionsClass(): Class<out BaseState> = WaccRunConfigurationOptions::class.java
 
     companion object {
         private const val FACTORY_NAME = "WACC configuration factory"

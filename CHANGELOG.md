@@ -5,7 +5,12 @@
 ## [Unreleased]
 ### Added
 - Initial syntax highlighting support
-- Semantics annotator
-- Code completion and brace matching
-- Code commenter
-- Run configuration and ability to run from file
+- Add semantics annotator
+- Add code completion and brace matching
+- Add code commenter
+- Add ability to run 
+
+
+## [1.0.0] - 2021-03-13
+### Added
+- Initial release of plugin

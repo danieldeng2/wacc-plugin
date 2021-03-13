@@ -25,16 +25,14 @@ class WaccRunConfiguration constructor(project: Project, factory: ConfigurationF
             field = value
         }
 
-    override fun getOptions(): WaccRunConfigurationOptions {
-        return super.getOptions() as WaccRunConfigurationOptions
-    }
+    override fun getOptions(): WaccRunConfigurationOptions =
+        super.getOptions() as WaccRunConfigurationOptions
 
-    override fun getConfigurationEditor(): SettingsEditor<out RunConfiguration?> {
-        return WaccSettingsEditor()
-    }
+    override fun getConfigurationEditor(): SettingsEditor<out RunConfiguration?> =
+        WaccSettingsEditor()
 
-    override fun getState(executor: Executor, environment: ExecutionEnvironment): RunProfileState {
-        return object : CommandLineState(environment) {
+    override fun getState(executor: Executor, environment: ExecutionEnvironment): RunProfileState =
+        object : CommandLineState(environment) {
 
             override fun startProcess(): ProcessHandler {
                 val commandLine =
@@ -47,5 +45,4 @@ class WaccRunConfiguration constructor(project: Project, factory: ConfigurationF
                 return processHandler
             }
         }
-    }
 }

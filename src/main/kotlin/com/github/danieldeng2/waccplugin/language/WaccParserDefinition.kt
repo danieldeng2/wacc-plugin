@@ -32,17 +32,12 @@ class WaccParserDefinition : ParserDefinition {
                 (parser as WACCParser).prog()
         }
 
-    override fun createFile(viewProvider: FileViewProvider): PsiFile {
-        return WaccFile(viewProvider)
-    }
+    override fun createFile(viewProvider: FileViewProvider): PsiFile = WaccFile(viewProvider)
 
-    override fun createElement(node: ASTNode): PsiElement {
-        return ANTLRPsiNode(node)
-    }
+    override fun createElement(node: ASTNode): PsiElement = ANTLRPsiNode(node)
 
-    override fun spaceExistenceTypeBetweenTokens(left: ASTNode, right: ASTNode): SpaceRequirements {
-        return SpaceRequirements.MAY
-    }
+    override fun spaceExistenceTypeBetweenTokens(left: ASTNode, right: ASTNode): SpaceRequirements =
+        SpaceRequirements.MAY
 
     /* returns static objects */
     override fun getWhitespaceTokens() = WHITE_SPACES

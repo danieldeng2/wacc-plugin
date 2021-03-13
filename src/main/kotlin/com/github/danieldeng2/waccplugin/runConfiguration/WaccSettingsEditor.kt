@@ -11,6 +11,8 @@ class WaccSettingsEditor : SettingsEditor<WaccRunConfiguration?>() {
     private lateinit var myPanel: JPanel
     private lateinit var waccFileName: LabeledComponent<TextFieldWithBrowseButton>
 
+    override fun createEditor(): JComponent = myPanel
+
     override fun resetEditorFrom(s: WaccRunConfiguration) {
         if (s.waccFileName != null) {
             waccFileName.component.text = s.waccFileName!!
@@ -19,10 +21,6 @@ class WaccSettingsEditor : SettingsEditor<WaccRunConfiguration?>() {
 
     override fun applyEditorTo(s: WaccRunConfiguration) {
         s.waccFileName = waccFileName.component.text
-    }
-
-    override fun createEditor(): JComponent {
-        return myPanel
     }
 
     private fun createUIComponents() {
