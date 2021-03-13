@@ -22,14 +22,16 @@
         <lang.braceMatcher language="WACC"
                            implementationClass="com.github.danieldeng2.waccplugin.completion.WaccBraceMatcher"/>
 
-        <lang.commenter language="WACC" implementationClass="com.github.danieldeng2.waccplugin.completion.WaccCommenter"/>
+        <lang.commenter language="WACC"
+                        implementationClass="com.github.danieldeng2.waccplugin.completion.WaccCommenter"/>
 
 
         <externalAnnotator language="WACC"
                            implementationClass="com.github.danieldeng2.waccplugin.annotator.WaccExternalAnnotator"/>
 
-        <completion.contributor language="WACC"
-                                implementationClass="com.github.danieldeng2.waccplugin.completion.WaccCompletionContributor"/>
+        <defaultLiveTemplates file="/templates/WACC.xml"/>
+
+        <liveTemplateContext implementation="com.github.danieldeng2.waccplugin.completion.WaccContext"/>
 
         <configurationType
                 implementation="com.github.danieldeng2.waccplugin.runConfiguration.WaccRunConfigurationType"/>

@@ -10,7 +10,6 @@
 - Add code commenter
 - Add ability to run 
 
-
 ## [1.0.0] - 2021-03-13
 ### Added
 - Initial release of plugin
