@@ -1,6 +1,6 @@
 <idea-plugin>
     <id>com.github.danieldeng2.waccplugin</id>
-    <name>WACC</name>
+    <name>WACC Language</name>
     <vendor>danieldeng2</vendor>
 
     <!-- Product and plugin compatibility requirements -->
@@ -8,8 +8,6 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.danieldeng2.waccplugin.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.github.danieldeng2.waccplugin.services.MyProjectService"/>
 
         <fileType name="WACC File" implementationClass="com.github.danieldeng2.waccplugin.language.WaccFileType"
                   language="WACC" extensions="wacc"/>
@@ -44,13 +42,8 @@
 
     </extensions>
 
-    <applicationListeners>
-        <listener class="com.github.danieldeng2.waccplugin.listeners.MyProjectManagerListener"
-                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
-    </applicationListeners>
 
     <actions>
-
         <action id="com.github.danieldeng2.waccplugin.action.PopupDialogAction"
                 class="com.github.danieldeng2.waccplugin.action.PopupDialogAction" text="Popup Dialog Action"
                 description="Popup dialog">
