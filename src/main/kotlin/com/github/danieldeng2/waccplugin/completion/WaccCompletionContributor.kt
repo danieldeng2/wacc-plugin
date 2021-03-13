@@ -1,4 +1,4 @@
-package com.github.danieldeng2.waccplugin.language.completion
+package com.github.danieldeng2.waccplugin.completion
 
 import com.intellij.codeInsight.completion.CompletionContributor
 import com.intellij.codeInsight.completion.CompletionParameters

@@ -1,4 +1,4 @@
-package com.github.danieldeng2.waccplugin.language.completion
+package com.github.danieldeng2.waccplugin.completion
 
 import com.intellij.codeInsight.completion.CompletionResultSet
 import com.intellij.codeInsight.lookup.LookupElementBuilder

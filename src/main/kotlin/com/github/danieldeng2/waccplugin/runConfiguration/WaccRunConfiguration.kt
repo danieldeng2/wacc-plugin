@@ -18,7 +18,12 @@ import java.nio.charset.Charset
 class WaccRunConfiguration constructor(project: Project, factory: ConfigurationFactory, name: String) :
     LocatableConfigurationBase<WaccRunConfigurationOptions>(project, factory, name) {
 
-    var waccFileName: String? = options.waccFileName
+    var waccFileName: String? = null
+        get() = options.waccFileName
+        set(value) {
+            options.waccFileName = value
+            field = value
+        }
 
     override fun getOptions(): WaccRunConfigurationOptions {
         return super.getOptions() as WaccRunConfigurationOptions

@@ -1,4 +1,4 @@
-package com.github.danieldeng2.waccplugin.language.annotator
+package com.github.danieldeng2.waccplugin.annotator
 
 import com.intellij.lang.annotation.AnnotationHolder
 import com.intellij.lang.annotation.ExternalAnnotator

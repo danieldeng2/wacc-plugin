@@ -1,5 +1,6 @@
-package com.github.danieldeng2.waccplugin.language
+package com.github.danieldeng2.waccplugin.annotator
 
+import com.github.danieldeng2.waccplugin.language.WaccLanguage
 import com.intellij.lexer.Lexer
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors
 import com.intellij.openapi.editor.colors.TextAttributesKey

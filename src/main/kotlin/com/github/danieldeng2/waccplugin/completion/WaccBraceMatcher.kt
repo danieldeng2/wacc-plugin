@@ -1,4 +1,4 @@
-package com.github.danieldeng2.waccplugin.language.completion
+package com.github.danieldeng2.waccplugin.completion
 
 import com.github.danieldeng2.waccplugin.language.WaccLanguage
 import com.intellij.lang.BracePair

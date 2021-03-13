@@ -12,7 +12,9 @@ class WaccSettingsEditor : SettingsEditor<WaccRunConfiguration?>() {
     private lateinit var waccFileName: LabeledComponent<TextFieldWithBrowseButton>
 
     override fun resetEditorFrom(s: WaccRunConfiguration) {
-        waccFileName.component.text = s.waccFileName ?: ""
+        if (s.waccFileName != null) {
+            waccFileName.component.text = s.waccFileName!!
+        }
     }
 
     override fun applyEditorTo(s: WaccRunConfiguration) {

@@ -1,7 +1,5 @@
-package com.github.danieldeng2.waccplugin.language.psi
+package com.github.danieldeng2.waccplugin.language
 
-import com.github.danieldeng2.waccplugin.language.WaccFileType
-import com.github.danieldeng2.waccplugin.language.WaccLanguage
 import com.intellij.extapi.psi.PsiFileBase
 import com.intellij.openapi.fileTypes.FileType
 import com.intellij.psi.FileViewProvider

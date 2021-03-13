@@ -1,6 +1,5 @@
 package com.github.danieldeng2.waccplugin.language
 
-import com.github.danieldeng2.waccplugin.language.psi.WaccFile
 import com.intellij.lang.ASTNode
 import com.intellij.lang.ParserDefinition
 import com.intellij.lang.ParserDefinition.SpaceRequirements

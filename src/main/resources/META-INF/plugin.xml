@@ -16,38 +16,30 @@
                                implementationClass="com.github.danieldeng2.waccplugin.language.WaccParserDefinition"/>
 
         <lang.syntaxHighlighterFactory language="WACC"
-                                       implementationClass="com.github.danieldeng2.waccplugin.language.WaccSyntaxHighlighterFactory"/>
+                                       implementationClass="com.github.danieldeng2.waccplugin.annotator.WaccSyntaxHighlighterFactory"/>
 
 
         <lang.braceMatcher language="WACC"
-                           implementationClass="com.github.danieldeng2.waccplugin.language.completion.WaccBraceMatcher"/>
+                           implementationClass="com.github.danieldeng2.waccplugin.completion.WaccBraceMatcher"/>
 
-        <lang.commenter language="WACC" implementationClass="com.github.danieldeng2.waccplugin.language.WaccCommenter"/>
+        <lang.commenter language="WACC" implementationClass="com.github.danieldeng2.waccplugin.completion.WaccCommenter"/>
 
 
         <externalAnnotator language="WACC"
-                           implementationClass="com.github.danieldeng2.waccplugin.language.annotator.WaccExternalAnnotator"/>
+                           implementationClass="com.github.danieldeng2.waccplugin.annotator.WaccExternalAnnotator"/>
 
         <completion.contributor language="WACC"
-                                implementationClass="com.github.danieldeng2.waccplugin.language.completion.WaccCompletionContributor"/>
+                                implementationClass="com.github.danieldeng2.waccplugin.completion.WaccCompletionContributor"/>
 
         <configurationType
                 implementation="com.github.danieldeng2.waccplugin.runConfiguration.WaccRunConfigurationType"/>
 
         <runLineMarkerContributor language="WACC"
-                                  implementationClass="com.github.danieldeng2.waccplugin.language.WaccRunLineMarkerProvider"/>
+                                  implementationClass="com.github.danieldeng2.waccplugin.runConfiguration.WaccRunLineMarkerProvider"/>
 
         <runConfigurationProducer
                 implementation="com.github.danieldeng2.waccplugin.runConfiguration.WaccRunConfigurationProducer"/>
 
     </extensions>
 
-
-    <actions>
-        <action id="com.github.danieldeng2.waccplugin.action.PopupDialogAction"
-                class="com.github.danieldeng2.waccplugin.action.PopupDialogAction" text="Popup Dialog Action"
-                description="Popup dialog">
-            <add-to-group group-id="ToolsMenu" anchor="first"/>
-        </action>
-    </actions>
 </idea-plugin>
