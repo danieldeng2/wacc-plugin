@@ -36,6 +36,12 @@
         <configurationType
                 implementation="com.github.danieldeng2.waccplugin.runConfiguration.WaccRunConfigurationType"/>
 
+        <runLineMarkerContributor language="WACC"
+                                  implementationClass="com.github.danieldeng2.waccplugin.language.WaccRunLineMarkerProvider"/>
+
+        <runConfigurationProducer
+                implementation="com.github.danieldeng2.waccplugin.runConfiguration.WaccRunConfigurationProducer"/>
+
     </extensions>
 
     <applicationListeners>

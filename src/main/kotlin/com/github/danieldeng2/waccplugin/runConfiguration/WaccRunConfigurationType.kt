@@ -5,7 +5,7 @@ import com.intellij.execution.configurations.ConfigurationFactory
 import com.intellij.execution.configurations.ConfigurationType
 import javax.swing.Icon
 
-class WaccRunConfigurationType : ConfigurationType {
+object WaccRunConfigurationType : ConfigurationType {
     override fun getDisplayName(): String {
         return "WACC Application"
     }

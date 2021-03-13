@@ -5,6 +5,7 @@
 ## [Unreleased]
 ### Added
 - Initial syntax highlighting support
-- Add semantics annotator
-- Add code completion and brace matching
-- Add code commenter
+- Semantics annotator
+- Code completion and brace matching
+- Code commenter
+- Run configuration and ability to run from file

@@ -1,9 +1,9 @@
 package com.github.danieldeng2.waccplugin.runConfiguration
 
-import com.intellij.execution.configurations.RunConfigurationOptions
+import com.intellij.execution.configurations.LocatableRunConfigurationOptions
 import com.intellij.openapi.components.StoredProperty
 
-class WaccRunConfigurationOptions : RunConfigurationOptions() {
+class WaccRunConfigurationOptions : LocatableRunConfigurationOptions() {
 
     private val waccFileNameStore: StoredProperty<String?> = string("").provideDelegate(this, "waccFileName")
 

@@ -6,7 +6,7 @@ import com.intellij.execution.configurations.RunConfiguration
 import com.intellij.openapi.components.BaseState
 import com.intellij.openapi.project.Project
 
-class WaccConfigurationFactory(type: ConfigurationType?) : ConfigurationFactory(type!!) {
+class WaccConfigurationFactory(type: ConfigurationType) : ConfigurationFactory(type) {
     override fun createTemplateConfiguration(project: Project): RunConfiguration {
         return WaccRunConfiguration(project, this, "WACC")
     }
