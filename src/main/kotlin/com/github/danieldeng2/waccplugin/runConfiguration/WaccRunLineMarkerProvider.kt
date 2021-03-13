@@ -8,10 +8,10 @@ import com.intellij.psi.PsiFile
 
 class WaccRunLineMarkerProvider : RunLineMarkerContributor() {
     override fun getInfo(e: PsiElement): Info? {
-        if (e !is PsiFile) return null
-
-        val actions: Array<AnAction> = ExecutorAction.getActions(0)
-
-        return Info(actions[0])
+        if (e.parent.parent is PsiFile && e.text == "begin") {
+            val actions: Array<AnAction> = ExecutorAction.getActions(0)
+            return Info(actions[0])
+        }
+        return null
     }
 }

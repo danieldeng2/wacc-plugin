@@ -44,9 +44,8 @@ class WaccExternalAnnotator : ExternalAnnotator<CharStream, List<Issue>>() {
                 issues = issues
             )
         } catch (e: Exception) {
-            return emptyList()
+            return issues
         }
-
         return issues
     }
 
