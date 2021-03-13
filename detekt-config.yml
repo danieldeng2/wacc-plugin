@@ -14,7 +14,11 @@ complexity:
 exceptions:
   TooGenericExceptionCaught:
     active: false
+  SwallowedException:
+    active: false
 
 style:
   ReturnCount:
+    active: false
+  UnusedPrivateMember:
     active: false
