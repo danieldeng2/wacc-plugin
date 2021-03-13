@@ -1,7 +1,7 @@
 # wacc-plugin
 
 ![Build](https://github.com/danieldeng2/wacc-plugin/workflows/Build/badge.svg)
-[![Version](https://img.shields.io/jetbrains/plugin/v/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/PLUGIN_ID)
+[![Version](https://img.shields.io/jetbrains/plugin/v/16301.svg)](https://plugins.jetbrains.com/plugin/16301)
 
 <!-- Plugin description -->
 
@@ -27,7 +27,9 @@ This plugin aims to provide support for the WACC language in Intellij.
   <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Install plugin from disk...</kbd>
 
 
-## ToDo list
-- [ ] [Publish a plugin manually](https://plugins.jetbrains.com/docs/intellij/publishing-plugin.html?from=IJPluginTemplate) for the first time.
-- [ ] Set the Plugin ID in the above README badges.
-- [ ] Set the [Deployment Token](https://plugins.jetbrains.com/docs/marketplace/plugin-upload.html).
+## Features
+- [x] Syntax highlighting support
+- [x] Syntax and semantic checks
+- [x] Code completion and brace matching
+- [x] Commenting out code
+- [ ] Run code on x86
