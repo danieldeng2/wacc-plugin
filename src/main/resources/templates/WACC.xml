@@ -20,6 +20,11 @@
       <option name="WACC" value="true"/>
     </context>
   </template>
+  <template name="begin" value="begin&#10;    $END$&#10;end" description="Begin block" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="WACC" value="true"/>
+    </context>
+  </template>
   <template name="print" value="print &quot;$VALUE$&quot;$END$" description="Print statement" toReformat="false" toShortenFQNames="true">
     <variable name="VALUE" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
@@ -67,22 +72,27 @@
       <option name="WACC" value="true"/>
     </context>
   </template>
-  <template name="int" value="int " description="Int type" toReformat="false" toShortenFQNames="true">
+  <template name="int" value="int" description="Int type" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="WACC" value="true"/>
     </context>
   </template>
-  <template name="bool" value="bool " description="Boolean type" toReformat="false" toShortenFQNames="true">
+  <template name="read" value="read " description="Read statement" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="WACC" value="true"/>
     </context>
   </template>
-  <template name="char" value="char " description="Character type" toReformat="false" toShortenFQNames="true">
+  <template name="bool" value="bool" description="Boolean type" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="WACC" value="true"/>
     </context>
   </template>
-  <template name="string" value="string " description="String Type" toReformat="false" toShortenFQNames="true">
+  <template name="char" value="char" description="Character type" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="WACC" value="true"/>
+    </context>
+  </template>
+  <template name="string" value="string" description="String Type" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="WACC" value="true"/>
     </context>
