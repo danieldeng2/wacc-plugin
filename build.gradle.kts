@@ -33,7 +33,7 @@ repositories {
     }
 }
 dependencies {
-    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.15.0")
+    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.16.0")
     implementation("org.antlr:antlr4-intellij-adaptor:0.1")
     implementation(fileTree(mapOf("dir" to "lib", "include" to listOf("*.jar"))))
 }
