@@ -54,10 +54,11 @@ class WaccRunConfiguration constructor(project: Project, factory: ConfigurationF
 
         return object : CommandLineState(environment) {
             override fun startProcess(): ProcessHandler {
-                val commandLine =
-                    GeneralCommandLine(execName).withWorkDirectory(project.basePath)
-                commandLine.charset = Charset.forName("UTF-8")
+                val command = if (messages.isEmpty()) execName else "ls"
 
+                val commandLine =
+                    GeneralCommandLine(command).withWorkDirectory(project.basePath)
+                commandLine.charset = Charset.forName("UTF-8")
                 val processHandler = ProcessHandlerFactory.getInstance().createColoredProcessHandler(commandLine)
                 ProcessTerminatedListener.attach(processHandler)
                 return processHandler
@@ -90,7 +91,7 @@ class WaccRunConfiguration constructor(project: Project, factory: ConfigurationF
             writeToFile(instructions, asmFileName)
             I386Architecture.createExecutable(asmFileName, execName)
         } catch (e: ParserException) {
-            e.message?.let { messages.add(it) }
+            e.message?.let { messages.add("SYNTAX ERROR: \n$it") }
         }
         issues.forEach { messages.add(it.toString()) }
 
