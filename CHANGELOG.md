@@ -13,3 +13,4 @@
 ## [1.0.0] - 2021-03-13
 ### Added
 - Initial release of plugin
+- Add support for inline compiler
