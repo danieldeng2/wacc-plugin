@@ -13,6 +13,13 @@ import com.intellij.execution.process.ProcessTerminatedListener
 import com.intellij.execution.runners.ExecutionEnvironment
 import com.intellij.openapi.options.SettingsEditor
 import com.intellij.openapi.project.Project
+import org.antlr.v4.runtime.CharStreams
+import wacc48.analyser.exceptions.Issue
+import wacc48.generator.architecture.I386Architecture
+import wacc48.runAnalyser
+import wacc48.tree.nodes.ASTNode
+import wacc48.writeToFile
+import java.io.File
 import java.nio.charset.Charset
 
 class WaccRunConfiguration constructor(project: Project, factory: ConfigurationFactory, name: String) :
@@ -31,13 +38,30 @@ class WaccRunConfiguration constructor(project: Project, factory: ConfigurationF
     override fun getConfigurationEditor(): SettingsEditor<out RunConfiguration?> =
         WaccSettingsEditor()
 
-    override fun getState(executor: Executor, environment: ExecutionEnvironment): RunProfileState =
-        object : CommandLineState(environment) {
+    override fun getState(executor: Executor, environment: ExecutionEnvironment): RunProfileState? {
+        val waccFileName = waccFileName
+        if (waccFileName == null || !File(waccFileName).exists()) return null
 
+        val waccFile = File(waccFileName)
+
+        File("${project.basePath}/out").mkdir()
+        val execName = "${project.basePath}/out/${waccFile.name.removeSuffix(".wacc")}"
+        val asmFileName = "$execName.s"
+
+        val programNode: ASTNode
+        val issues: MutableList<Issue> = mutableListOf()
+
+        // TODO show errors
+        programNode = runAnalyser(CharStreams.fromPath(waccFile.toPath()), issues)
+        val instructions = I386Architecture.compile(programNode)
+
+        writeToFile(instructions, asmFileName)
+        I386Architecture.createExecutable(asmFileName, execName)
+
+        return object : CommandLineState(environment) {
             override fun startProcess(): ProcessHandler {
                 val commandLine =
-                    GeneralCommandLine("cat", waccFileName).withWorkDirectory(project.basePath)
-                commandLine.preparedCommandLine
+                    GeneralCommandLine(execName).withWorkDirectory(project.basePath)
                 commandLine.charset = Charset.forName("UTF-8")
 
                 val processHandler = ProcessHandlerFactory.getInstance().createColoredProcessHandler(commandLine)
@@ -45,4 +69,5 @@ class WaccRunConfiguration constructor(project: Project, factory: ConfigurationF
                 return processHandler
             }
         }
+    }
 }
