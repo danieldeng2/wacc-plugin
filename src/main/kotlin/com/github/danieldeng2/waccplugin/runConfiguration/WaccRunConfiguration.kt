@@ -1,5 +1,7 @@
 package com.github.danieldeng2.waccplugin.runConfiguration
 
+import com.intellij.execution.DefaultExecutionResult
+import com.intellij.execution.ExecutionResult
 import com.intellij.execution.Executor
 import com.intellij.execution.configurations.CommandLineState
 import com.intellij.execution.configurations.ConfigurationFactory
@@ -11,13 +13,15 @@ import com.intellij.execution.process.ProcessHandler
 import com.intellij.execution.process.ProcessHandlerFactory
 import com.intellij.execution.process.ProcessTerminatedListener
 import com.intellij.execution.runners.ExecutionEnvironment
+import com.intellij.execution.runners.ProgramRunner
+import com.intellij.execution.ui.ConsoleViewContentType
 import com.intellij.openapi.options.SettingsEditor
 import com.intellij.openapi.project.Project
 import org.antlr.v4.runtime.CharStreams
 import wacc48.analyser.exceptions.Issue
+import wacc48.analyser.exceptions.ParserException
 import wacc48.generator.architecture.I386Architecture
 import wacc48.runAnalyser
-import wacc48.tree.nodes.ASTNode
 import wacc48.writeToFile
 import java.io.File
 import java.nio.charset.Charset
@@ -43,20 +47,10 @@ class WaccRunConfiguration constructor(project: Project, factory: ConfigurationF
         if (waccFileName == null || !File(waccFileName).exists()) return null
 
         val waccFile = File(waccFileName)
-
         File("${project.basePath}/out").mkdir()
         val execName = "${project.basePath}/out/${waccFile.name.removeSuffix(".wacc")}"
-        val asmFileName = "$execName.s"
 
-        val programNode: ASTNode
-        val issues: MutableList<Issue> = mutableListOf()
-
-        // TODO show errors
-        programNode = runAnalyser(CharStreams.fromPath(waccFile.toPath()), issues)
-        val instructions = I386Architecture.compile(programNode)
-
-        writeToFile(instructions, asmFileName)
-        I386Architecture.createExecutable(asmFileName, execName)
+        val messages = compileWaccProgram(waccFile, execName)
 
         return object : CommandLineState(environment) {
             override fun startProcess(): ProcessHandler {
@@ -68,6 +62,38 @@ class WaccRunConfiguration constructor(project: Project, factory: ConfigurationF
                 ProcessTerminatedListener.attach(processHandler)
                 return processHandler
             }
+
+            override fun execute(executor: Executor, runner: ProgramRunner<*>): ExecutionResult {
+                val processHandler = startProcess()
+                val console = createConsole(executor)
+                messages.forEach {
+                    console?.print("$it\n", ConsoleViewContentType.ERROR_OUTPUT)
+                }
+                if (messages.isEmpty()) console?.attachToProcess(processHandler)
+                return DefaultExecutionResult(
+                    console,
+                    processHandler,
+                    *createActions(console, processHandler, executor)
+                )
+            }
         }
+    }
+
+    private fun compileWaccProgram(waccFile: File, execName: String): List<String> {
+        val asmFileName = "$execName.s"
+
+        val issues: MutableList<Issue> = mutableListOf()
+        val messages: MutableList<String> = mutableListOf()
+        try {
+            val programNode = runAnalyser(CharStreams.fromPath(waccFile.toPath()), issues)
+            val instructions = I386Architecture.compile(programNode)
+            writeToFile(instructions, asmFileName)
+            I386Architecture.createExecutable(asmFileName, execName)
+        } catch (e: ParserException) {
+            e.message?.let { messages.add(it) }
+        }
+        issues.forEach { messages.add(it.toString()) }
+
+        return messages
     }
 }
