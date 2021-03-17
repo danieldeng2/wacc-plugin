@@ -82,7 +82,7 @@ class WaccRunConfiguration constructor(project: Project, factory: ConfigurationF
     }
 
     private fun compileWaccProgram(waccFile: File, execName: String): List<String> {
-        val dependencyNeeded = "Please ensure that gcc, gcc-miltilib / glibc-devel.i686, and nasm are all " +
+        val dependencyNeeded = "Please ensure that gcc, gcc-multilib / glibc-devel.i686, and nasm are all " +
             "installed in order to compile wacc programs for x86."
 
         val asmFileName = "$execName.s"
