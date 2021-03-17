@@ -24,6 +24,7 @@ import wacc48.generator.architecture.I386Architecture
 import wacc48.runAnalyser
 import wacc48.writeToFile
 import java.io.File
+import java.io.IOException
 import java.nio.charset.Charset
 
 class WaccRunConfiguration constructor(project: Project, factory: ConfigurationFactory, name: String) :
@@ -81,6 +82,9 @@ class WaccRunConfiguration constructor(project: Project, factory: ConfigurationF
     }
 
     private fun compileWaccProgram(waccFile: File, execName: String): List<String> {
+        val dependencyNeeded = "Please ensure that gcc, gcc-miltilib / glibc-devel.i686, and nasm are all " +
+            "installed in order to compile wacc programs for x86."
+
         val asmFileName = "$execName.s"
 
         val issues: MutableList<Issue> = mutableListOf()
@@ -92,8 +96,14 @@ class WaccRunConfiguration constructor(project: Project, factory: ConfigurationF
             I386Architecture.createExecutable(asmFileName, execName)
         } catch (e: ParserException) {
             e.message?.let { messages.add("SYNTAX ERROR: \n$it") }
+        } catch (e: IOException) {
+            messages.add(dependencyNeeded)
         }
-        issues.forEach { messages.add(it.toString()) }
+
+        messages.apply {
+            addAll(issues.map { it.toString() })
+            if (!File(execName).exists()) add(dependencyNeeded)
+        }
 
         return messages
     }

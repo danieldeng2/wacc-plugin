@@ -12,6 +12,9 @@ It also features a rich set of extra constructs, such as simple types, functions
 
 This plugin aims to provide support for the WACC language in Intellij. 
 
+**Please ensure that `gcc`, `gcc-miltilib`/`glibc-devel.i686`, and `nasm` are all
+installed in order to compile wacc programs for x86.**
+
 <!-- Plugin description end -->
 
 ## Installation
