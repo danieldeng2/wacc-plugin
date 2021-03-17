@@ -3,6 +3,7 @@
 # wacc-plugin Changelog
 
 ## [Unreleased]
+## [1.1.0]
 ### Added
 - Add support for inline compiler
 - Add integrated WACC shell
