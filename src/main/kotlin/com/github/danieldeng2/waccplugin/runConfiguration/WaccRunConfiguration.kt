@@ -102,7 +102,7 @@ class WaccRunConfiguration constructor(project: Project, factory: ConfigurationF
 
         messages.apply {
             addAll(issues.map { it.toString() })
-            if (!File(execName).exists()) add(dependencyNeeded)
+            if (!File(execName).exists() && messages.isEmpty()) add(dependencyNeeded)
         }
 
         return messages
