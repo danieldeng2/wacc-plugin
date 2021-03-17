@@ -10,7 +10,8 @@
 - Add code commenter
 - Add ability to run 
 
-## [1.0.0] - 2021-03-13
+## [1.0.0]
 ### Added
 - Initial release of plugin
 - Add support for inline compiler
+- Add integrated WACC shell

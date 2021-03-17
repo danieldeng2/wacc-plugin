@@ -42,6 +42,20 @@
         <runConfigurationProducer
                 implementation="com.github.danieldeng2.waccplugin.runConfiguration.WaccRunConfigurationProducer"/>
 
+        <toolWindow id="WACC"
+                    anchor="bottom"
+                    icon="AllIcons.Toolwindows.ToolWindowRun"
+                    secondary="false"
+                    canCloseContents="true"
+                    factoryClass="com.github.danieldeng2.waccplugin.action.WaccShellToolWindow"/>
     </extensions>
 
+    <actions>
+        <action id="com.github.danieldeng2.waccplugin.action.WaccShellAction"
+                class="com.github.danieldeng2.waccplugin.action.WaccShellAction" text="WACC Shell"
+                icon="AllIcons.Toolwindows.ToolWindowRun"
+                description="Launch interactive WACC shell">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </action>
+    </actions>
 </idea-plugin>

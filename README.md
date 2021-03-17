@@ -33,4 +33,4 @@ This plugin aims to provide support for the WACC language in Intellij.
 - [x] Code completion and brace matching
 - [x] Commenting out code
 - [x] Run code on x86
-- [ ] Integrated WACC shell
+- [x] Integrated WACC shell
