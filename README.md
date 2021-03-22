@@ -5,7 +5,7 @@
 
 <!-- Plugin description -->
 
-WACC (pronounced “whack”) is a simple variant on the While family of languages .  
+WACC is a simple variant on the While family of languages .  
 
 It features all of the common language constructs you would expect of a While-like language, such as program variables, simple expressions, conditional branching, looping and no-ops.
 It also features a rich set of extra constructs, such as simple types, functions, arrays and basictuple creation on the heap.
